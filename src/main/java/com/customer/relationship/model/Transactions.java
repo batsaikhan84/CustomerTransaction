@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "transaction_table")
-public class Transaction extends AuditModel{
+public class Transactions extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -12,25 +12,25 @@ public class Transaction extends AuditModel{
     private Double amount;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private Users users;
 
-    public Transaction() {
+    public Transactions() {
     }
 
     public Double getAmount() {
         return amount;
     }
 
-    public User getUser() {
-        return user;
+    public Users getUser() {
+        return users;
     }
 
     public void setAmount(Double amount) {
         this.amount = amount;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(Users users) {
+        this.users = users;
     }
 
     public long getId() {

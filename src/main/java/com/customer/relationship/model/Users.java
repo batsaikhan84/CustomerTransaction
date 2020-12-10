@@ -7,8 +7,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "user_table")
-public class User extends AuditModel{
+public class Users extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -22,17 +21,17 @@ public class User extends AuditModel{
     @OneToMany(cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "user_id")
-    private Set<Transaction> transactionSet;
+    private Set<Transactions> transactionSet;
 
-    public Set<Transaction> getTransactionSet() {
+    public Set<Transactions> getTransactionSet() {
         return transactionSet;
     }
 
-    public void setTransactionSet(Set<Transaction> transactionSet) {
+    public void setTransactionSet(Set<Transactions> transactionSet) {
         this.transactionSet = transactionSet;
     }
 
-    public User() {
+    public Users() {
     }
 
     public long getId() {
