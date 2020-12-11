@@ -14,7 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @RestController
 public class TransactionController {
     @Autowired
@@ -50,5 +53,16 @@ public class TransactionController {
             transaction.setAmount(transactionDetails.getAmount());
             return transactionRepository.save(transaction);
         }).orElseThrow(() -> new CustomerTransactionNotFoundException("ID: " + userId + " not found"));
+    }
+    @DeleteMapping("/users/{userId}/transactions/{transactionId}")
+    public Map<String, String> deleteTransaction(@PathVariable(value = "userId") Long userId, @PathVariable(value = "transactionId") Long transactionId,
+                                          @RequestBody Transactions transactionDetails) {
+        return transactionRepository.findByIdAndUserId(transactionId, userId).map(transaction -> {
+            transactionRepository.delete(transaction);
+            Map<String, String> deleteTransaction = new HashMap<>();
+            deleteTransaction.put("ID: " + userId, " not found");
+            return deleteTransaction;
+        }).
+                orElseThrow(() -> new CustomerTransactionNotFoundException("ID: " + transactionId + " not found"));
     }
 }
