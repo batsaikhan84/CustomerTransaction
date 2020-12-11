@@ -1,6 +1,7 @@
 package com.customer.relationship.controller;
 
 import com.customer.relationship.Repository.TransactionRepository;
+import com.customer.relationship.Repository.UserRepository;
 import com.customer.relationship.model.Transactions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -13,10 +14,8 @@ import java.util.List;
 public class TransactionController {
     @Autowired
     public TransactionRepository transactionRepository;
-    @GetMapping("/transactions")
-    public String getTransactions(Model model) {
-        List<Transactions> transactionList = new ArrayList<>();
-        model.addAttribute("transactions", transactionList);
-        return "transactionList";
-    }
+    @Autowired
+    public UserRepository userRepository;
+    @GetMapping("/users/{id}/transactions")
+    public
 }
